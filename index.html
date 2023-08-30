@@ -4,11 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Gestão de Frotas</title>
     <link rel="stylesheet" href="style.css">
-    <!-- BOOTSTRAP -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
@@ -18,11 +15,50 @@
         </div>
     </header>
     <main>
-        <p>DADOS:</p>
-        <div class="formulario" id="formulario">
+        <div class="formulario" id="formulario-veiculo">
             <form action="">
+                <p class="dadosVeiculo">Dados do Veículo:</p>
+
+                <label for="pesoChassi">Peso do Chassi:</label>
+                <input type="text" name="Chassi" id="pesoChassi">
                 
+                <label for="pesoSemiReboque">Peso do Semi-Reboque:</label>
+                <input type="number" name="Semi-Reboque" id="pesoSemiReboque">
+
+                <label for="pesoCarroceria">Peso da Carroceria:</label>
+                <input type="number" name="Carroceria" id="pesoCarroceria">
+
+                <label for="pesoOutrosEquipamentos">Peso de Outros Equipamentos:</label>
+                <input type="number" name="OutrosEquipamentos" id="pesoOutrosEquipamentos">
+
+                <p>Calcular Peso Total: <span id="pesoTotal"></span></p>
+                <button type="button" id="btnPesoTotal">Calcular Peso Total</button>
             </form>
+        </div> 
+        <div class="formulario" id="formulario-operacao">
+            <p class="dadosVeiculo">Dados da Operação:</p>
+            <label for="pesoBrutoTotal">Peso Bruto Total (PBT):</label>
+            <input type="number" name="BrutoTotal" id="pesoBrutoTotal">
+            <label for="velocidadeIda">Velocidade de ida (km/h):</label>
+            <input type="number" name="VelocidadeIda" id="velocidadeIda">
+            <label for="velocidadeVolta">Velocidade de volta (km/h):</label>
+            <input type="number" name="VelocidadeVolta" id="velocidadeVolta">
+            <label for="tempoCarga">Tempo de carga (horas):</label>
+            <input type="number" name="TempoCarga" id="tempoCarga">
+            <label for="tempoDescarga">Tempo de descarga (horas):</label>
+            <input type="number" name="TempoDescarga" id="tempoDescarga">
+            <label for="distanciaIda">Distância percorrida na ida (Km):</label>
+            <input type="number" name="DistanciaIda" id="distanciaIda">
+            <label for="distanciaVolta">Distância percorrida na volta (Km):</label>
+            <input type="number" name="DistanciaVolta" id="distanciaVolta">
+            <label for="jornadaUtil">Jornada de trabalho diária (horas):</label>
+            <input type="number" name="JornadaUtil" id="jornadaUtil">
+            <label for="TurnosDiarios">Turnos Diarios:</label>
+            <input type="number" id="turnosDiarios">
+            <label for="NumerosDiasUteis">Quantidade de dias úteis:</label>
+            <input type="number" id="numeroDiasUteis">
+            <label for="ParadasManutencao">Quantidade de dias para a manutenção:</label>
+            <input type="number" id="paradasManutencao">
         </div>
     </main>
     <script src="script.js"></script>
