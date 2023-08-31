@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 
 <head>
@@ -6,6 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestão de Frotas</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -21,32 +29,33 @@
 
                 <label for="pesoChassi">Peso do Chassi:</label>
                 <input type="text" name="Chassi" id="pesoChassi">
-                
+
                 <label for="pesoSemiReboque">Peso do Semi-Reboque:</label>
                 <input type="number" name="Semi-Reboque" id="pesoSemiReboque">
-
-                <label for="pesoCarroceria">Peso da Carroceria:</label>
-                <input type="number" name="Carroceria" id="pesoCarroceria">
 
                 <label for="pesoOutrosEquipamentos">Peso de Outros Equipamentos:</label>
                 <input type="number" name="OutrosEquipamentos" id="pesoOutrosEquipamentos">
 
-                <p>Calcular Peso Total: <span id="pesoTotal"></span></p>
-                <button type="button" id="btnPesoTotal">Calcular Peso Total</button>
+                <label for="velocidadeIda">Velocidade de ida (km/h):</label>
+                <input type="number" name="velocidadeIda" id="velocidadeIda">
+
+                <label for="velocidadeVolta">Velocidade de volta (km/h):</label>
+                <input type="number" name="velocidadeVolta" id="velocidadeVolta">
+
+                <p>Calcular Frota Necessário: <span id="pesoTotal"></span></p>
+                <button type="button" id="btnFrotaTotal">Calcular Frota necessário</button>
+
             </form>
-        </div> 
+        </div>
         <div class="formulario" id="formulario-operacao">
             <p class="dadosVeiculo">Dados da Operação:</p>
             <label for="pesoBrutoTotal">Peso Bruto Total (PBT):</label>
-            <input type="number" name="BrutoTotal" id="pesoBrutoTotal">
-            <label for="velocidadeIda">Velocidade de ida (km/h):</label>
-            <input type="number" name="VelocidadeIda" id="velocidadeIda">
-            <label for="velocidadeVolta">Velocidade de volta (km/h):</label>
-            <input type="number" name="VelocidadeVolta" id="velocidadeVolta">
-            <label for="tempoCarga">Tempo de carga (horas):</label>
-            <input type="number" name="TempoCarga" id="tempoCarga">
-            <label for="tempoDescarga">Tempo de descarga (horas):</label>
-            <input type="number" name="TempoDescarga" id="tempoDescarga">
+            <input type="number" name="pesoBrutoTotal" id="pesoBrutoTotal">
+
+            <label for="tempoCarga">Tempo de carga e descarga na ida (minutos):</label>
+            <input type="number" name="TempoCarga" id="tempoCargaDescargaIda">
+            <label for="tempoDescarga">Tempo de carga e descarga na volta (minutos):</label>
+            <input type="number" name="TempoDescarga" id="tempoCargaDescargaVolta">
             <label for="distanciaIda">Distância percorrida na ida (Km):</label>
             <input type="number" name="DistanciaIda" id="distanciaIda">
             <label for="distanciaVolta">Distância percorrida na volta (Km):</label>
@@ -58,9 +67,37 @@
             <label for="NumerosDiasUteis">Quantidade de dias úteis:</label>
             <input type="number" id="numeroDiasUteis">
             <label for="ParadasManutencao">Quantidade de dias para a manutenção:</label>
-            <input type="number" id="paradasManutencao">
+            <input type="number" id="paradasManutencao"> <br> <br> <br>
+
+            <p class="dadosVeiculo">Dados da Carga:</p>
+            <label for="TipoCarga">Tipo da carga:</label>
+            <input type="text" id="tipoCarga">
+
+            <label for="QuantidadeMensal">Quantidade mensal:</label>
+            <input type="number" id="quantidadeMensal">
+
+        </div>
+        <!-- MODAL -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">DADOS FROTA</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="corpoModal">
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Understood</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
+
     <script src="script.js"></script>
 </body>
 

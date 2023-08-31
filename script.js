@@ -1,65 +1,85 @@
-/**
- * 
- * B
- * pesoBrutoTotal
- * pesoTotalVeiculo = VALOR DA FUNÇÂO
- * 
- * C
- * cargaTotal,
- * capacidadeUtil = VALOR DA FUNÇÂO
- * 
- * D
- * tempoIda
- * tempoVolta
- * tempoCarga
- * tempoDescarga
- * 
- * E
- * numeroTurnoDiario
- * duracaoTurno
- * 
- * F
- * tempoTotalOperação 
- * tempoTotalViagem
- * 
- * G
- * numerosDiasTrabalhados
- * numeroDiasParadosManutencao
- * 
- * H
- * numeroViagensDiarioVeiculo
- * numeroDiasTrabalhadosMes
- * 
- * I
- * numeroViagensNecessarias
- * 
- * (FAZER COM ATENÇÃO O I)
- */
-
-//Calcular o peso total
-
+// Obtendo os elementos do formulário
 const pesoChassi = document.getElementById('pesoChassi');
-const pesoSemiReboque = document.getElementById('pesoSemiReboque')
-const pesoCarroceria = document.getElementById('pesoCarroceria')
-const pesoOutrosEquipamentos = document.getElementById('pesoOutrosEquipamentos')
-const pesoBrutoTotal = document.getElementById('pesoBrutoTotal')
-const btnCalculaPesoTotal = document.getElementById('btnPesoTotal')
+const pesoSemiReboque = document.getElementById('pesoSemiReboque');
+const pesoOutrosEquipamentos = document.getElementById('pesoOutrosEquipamentos');
+const pesoBrutoTotal = document.getElementById('pesoBrutoTotal');
+const btnCalcularFrota = document.getElementById('btnFrotaTotal');
+const quantidadeCargaMensal = document.getElementById('quantidadeMensal');
+const distanciaIda = document.getElementById('distanciaIda');
+const distanciaVolta = document.getElementById('distanciaVolta');
+const velocidadeIda = document.getElementById('velocidadeIda');
+const velocidadeVolta = document.getElementById('velocidadeVolta');
+const tempoCargaDescargaIda = document.getElementById('tempoCargaDescargaIda');
+const tempoCargaDescargaVolta = document.getElementById('tempoCargaDescargaVolta');
+const jornadaUtil = document.getElementById('jornadaUtil');
+const turnosDiarios = document.getElementById('turnosDiarios');
+const numeroDiasUteis = document.getElementById('numeroDiasUteis');
+const paradasManutencao = document.getElementById('paradasManutencao');
+const tipoCarga = document.getElementById('tipoCarga')
+
+btnCalcularFrota.addEventListener('click', () => {
+    // Calculando o Peso Total
+    const pesoTotalValue = Number(pesoChassi.value) + Number(pesoSemiReboque.value) + Number(pesoOutrosEquipamentos.value);
 
 
-btnCalculaPesoTotal.addEventListener('click', () => {
+    // Calculando a Carga Útil do Veículo
+    const cargaUtil = parseFloat(pesoBrutoTotal.value) - pesoTotalValue;
+    console.log(cargaUtil);
+
+    // Calculando o Número de Viagens Mensais
+    const totalDiasMes = 30;
+    var numeroViagensMesais = parseFloat(quantidadeCargaMensal.value) / totalDiasMes;
+    var numeroFixo = 2
+    numeroViagensMesais = numeroViagensMesais.toFixed(numeroFixo)
+    console.log(numeroViagensMesais);
+
+    // Calculando o Tempo Total de Viagem
+    const minutosPorHora = 60.0;
+    const tempoIda = (parseFloat(distanciaIda.value) / parseFloat(velocidadeIda.value)) * minutosPorHora;
+    const tempoVolta = (parseFloat(distanciaVolta.value) / parseFloat(velocidadeVolta.value)) * minutosPorHora;
+    var tempoViagemTotal = tempoIda + tempoVolta + parseFloat(tempoCargaDescargaIda.value) + parseFloat(tempoCargaDescargaVolta.value);
+
+    tempoViagemTotal = tempoViagemTotal.toFixed(2)
+    console.log(tempoViagemTotal);
+
+    // Calculando tempo diario de operação
+    var tempoDiarioOperacao = (Number(turnosDiarios.value) * Number(jornadaUtil.value)) / (Number(turnosDiarios.value)) * minutosPorHora
+    console.log(tempoDiarioOperacao)
+
+    //numero de viagens de um veiculo por dia 
+    var tempoViagemVeiculoDia = tempoDiarioOperacao / tempoViagemTotal
+    tempoViagemVeiculoDia = tempoViagemVeiculoDia.toFixed(4)
+    console.log(tempoViagemVeiculoDia)
+
+    // Calculo do número total de dias disponiveis no mês
+    var diasUteis = Number(numeroDiasUteis.value) - Number(paradasManutencao.value)
+    console.log(diasUteis)
+
+    //Calculando o de viagens mensais de um veiculo
+    var quantidadeViagensMensaisVeiculo = tempoViagemVeiculoDia * diasUteis
+    quantidadeViagensMensaisVeiculo = quantidadeViagensMensaisVeiculo.toFixed(2)
+    console.log(quantidadeViagensMensaisVeiculo)
+
+    //Calculo da Frota Necessaria
+    var frotaNecessaria = numeroViagensMesais / quantidadeViagensMensaisVeiculo
+    frotaNecessaria = Math.ceil(frotaNecessaria)
+    console.log(frotaNecessaria)
+
+    document.getElementById('pesoTotal').textContent = frotaNecessaria.toFixed(2);
+
+    $(function () {
+        var staticBackdrop = document.getElementById('staticBackdrop');
+        var myModal = new bootstrap.Modal(staticBackdrop);
+        myModal.show();
+    });
+
+    //tratamento de erro
     
-    const pesoTotal = document.getElementById('pesoTotal')
-    pesoTotal.textContent = +pesoChassi.value + +pesoSemiReboque.value + +pesoCarroceria.value + +pesoOutrosEquipamentos.value
+    var corpoModal = document.getElementById('corpoModal')
+    corpoModal.innerHTML = `
+        <h2>Tipo da carga: ${tipoCarga.value}</h2>
+        <h5>${frotaNecessaria} veículos necessários</h5>
+    `
 
-    //Carga Util do Veiculo
-    var cargaUtil = pesoBrutoTotal.value - pesoTotal.textContent
-    console.log(cargaUtil)
-
-    //numero
-
-})
-
-
-
-
+});
 
