@@ -17,7 +17,11 @@ const numeroDiasUteis = document.getElementById('numeroDiasUteis');
 const paradasManutencao = document.getElementById('paradasManutencao');
 const tipoCarga = document.getElementById('tipoCarga')
 
+
 btnCalcularFrota.addEventListener('click', () => {
+
+
+
     // Calculando o Peso Total
     const pesoTotalValue = Number(pesoChassi.value) + Number(pesoSemiReboque.value) + Number(pesoOutrosEquipamentos.value);
 

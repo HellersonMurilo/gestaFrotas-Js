@@ -76,3 +76,32 @@ button:hover {
     height: 100%;
     /* Certifique-se de que o modal ocupe toda a altura */
 }
+
+footer{
+    display: flex;
+    background-color: #000;
+    color: #fff;
+    height: 7rem
+
+}
+
+.col{
+    float: left;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    justify-content: space-around;
+}
+
+a:link{
+    text-decoration: none;
+}
+
+.icons > img{
+    display: inline-flex;
+    width: 30px;
+}
+
+.icons{
+    text-align: center;
+}
